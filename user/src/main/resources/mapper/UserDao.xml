@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.login.dao.UserDao">
+
+    <select id="getUser" resultType="User">
+        select * from bosch.user where `name` = #{name} and `password` = #{password}
+    </select>
+
+    <select id="getRoleByUserId" resultType="String">
+        select distinct role_name from role
+                                  left join user_role ur on role.role_id = ur.role_id
+                                  left join `user` u on ur.user_id = u.user_id
+        where u.user_id = #{userId}
+    </select>
+
+    <select id="getPrivilegeByRole" resultMap="roleMap">
+        SELECT `privilege`.`description`, `privilege`.privilege_id FROM `privilege`
+                                                                            LEFT JOIN role ON role.`privilege_id`=`privilege`.`privilege_id`
+        WHERE role.`role_name`= #{role}
+    </select>
+
+    <resultMap id="roleMap"  type="HashMap">
+        <result property="privilegeId" column="privilege_id" jdbcType="INTEGER" />
+        <result property="privilege" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAllRole" resultType="String">
+        select distinct `role_name` from role
+    </select>
+
+
+</mapper>

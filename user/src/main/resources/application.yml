@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+  type-aliases-package: com.example.login.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.27.202.217:3306/bosch?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password:
+    dbcp2:
+      remove-abandoned-on-borrow: true
+      remove-abandoned-timeout: 60
+
+  thymeleaf:
+    cache: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  application:
+    name: bosch-user-service

@@ -1,0 +1,69 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: bosch-gateway-service
+
+  cloud:
+    gateway:
+      routes:
+        - id: user
+          uri: http://bcsc.user.com:8080
+          predicates:
+            - Path=/user/auth/**
+
+        - id: data-analysis
+          uri: http://bcsc.danalysis.com:9003
+          predicates:
+            - Path=/api/v1/data/**
+
+        - id: user-for-login
+          uri: http://bcsc.user.com:8080
+          predicates:
+            - Path=/user/login
+          filters:
+            - IgnoreUserGlobalFilter
+
+        - id: user-for-get-token
+          uri: http://bcsc.user.com:8080
+          predicates:
+            - Path=/user/get_token**
+          filters:
+            - IgnoreUserGlobalFilter
+
+        - id: factory
+          uri: http://bcsc.factory.com:9002
+          predicates:
+            - Path=/api/v1/factory/**
+
+        - id: vehicle
+          uri: http://bcsc.vehicle.com:9001
+          predicates:
+            - Path=/api/v1/vehicle/**
+
+        - id: css
+          uri: http://bcsc.user.com:8080
+          predicates:
+            - Path=/css/**
+          filters:
+            - IgnoreUserGlobalFilter
+
+        - id: js
+          uri: http://bcsc.user.com:8080
+          predicates:
+            - Path=/js/**
+          filters:
+            - IgnoreUserGlobalFilter
+
+        - id: img
+          uri: http://bcsc.user.com:8080
+          predicates:
+            - Path=/img/**
+          filters:
+            - IgnoreUserGlobalFilter
+
+
+
+
+

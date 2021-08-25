@@ -1,0 +1,23 @@
+server:
+  port: 9003
+
+spring:
+  thymeleaf:
+    cache: false
+  application:
+    name: bosch-data-analysis-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.27.202.217:3306/bosch?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
+    dbcp2:
+      remove-abandoned-on-borrow: true
+      remove-abandoned-timeout: 60
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.boschrbcd.pojo
+  mapper-locations: classpath:bosch/mapper/*.xml
